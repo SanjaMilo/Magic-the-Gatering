@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PolarCape The Gathering</title>
+    <link rel="stylesheet" href="styles/styleHome.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sansita+Swashed&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <main>
+        <section id="homePage">
+            <div class="curved">
+                <div class="content">
+                    <h2>Sign in</h2>
+                    <form id="formSignIn">
+                        <div class="inputName">
+                            <input id="name" class="inp" type="text" placeholder="Your full name">
+                            <small class="small">Please enter valid name (min three characters and first upper
+                                letter)</small>
+                        </div>
+                        <div class="submitBtn">
+                            <button type="submit" class="btn">SIGN IN</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+        <section id="cardsPage">
+            <h2 class="welcomeMsg"></h2>
+            <button class="btn signOut">Sign out</button>
+            <div class="filtersMenu">
+                <div class="filter">
+                    <input id="nameSearch" class="searchInp" type="text" placeholder="&#x1f50d; Search by name">
+                </div>
+                <div class="filter">
+                    <select name="" id="types">
+                        <option value="">Select by type</option>
+                        <!-- add options dynamically here  -->
+                    </select>
+                </div>
+                <div class="filter">
+                    <select name="" id="colors">
+                        <option value="">Select by color</option>
+                        <option value="white">White</option>
+                        <option value="blue">Blue</option>
+                        <option value="black">Black</option>
+                        <option value="red">Red</option>
+                        <option value="green">Green</option>
+                    </select>
+                </div>
+                <div class="filter">
+                    <select class="btnSort" name="" id="sort">
+                        <option value="">Sort by</option>
+                        <option value="ascending">Ascending order</option>
+                        <option value="descending">Descending order</option>
+                    </select>
+                </div>
+            </div>
+            <div id="loader"></div>
+            <!-- add cards here dynamically -->
+            <div id="cardsList"></div>
+            <button class="loadMore">Load more</button>
+            
+        </section>
+        <footer id="footer">
+            <p>Zendikar rising. Zendikar calls. A quest awaits: <a class="alink" href="https://magic.wizards.com/en"
+                    target="_blank"> Magic: The Gathering &nbsp ARENA</a></p>
+            <button class="toTop">Top &uparrow;</button>        
+        </footer>
+    </main>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
