@@ -53,7 +53,7 @@ function drawCard(card) {
 	frontCard.appendChild(artist);
 
 	let types = document.createElement('p');
-	types.innerText = card.types.join(', ');
+	types.innerText = (card.types)? card.types.join(', ') : null;
 	frontCard.appendChild(types);
 
 	let set = document.createElement('p');
@@ -61,7 +61,7 @@ function drawCard(card) {
 	frontCard.appendChild(set);
 
 	let colors = document.createElement('p');
-	colors.innerText = card.colors.join(', ');
+	colors.innerText = (card.colors) ? card.colors.join(', ') : null;
 	frontCard.appendChild(colors);
 
 	return cardHolder;
@@ -80,7 +80,7 @@ function showLoader() {
 	loader.className = 'show';
 	setTimeout(() => {
 		loader.className = loader.className.replace('show', '');
-	}, 60000);
+	}, 90000);
 };
 
 // Hide loader when fetching finishes
@@ -97,7 +97,7 @@ function fetchData() {
 			hideLoader(); // invoke hide loader func
 			console.log(data);
 			dataArr = data.cards.slice();
-			// console.log(dataArr); // test
+			console.log(dataArr); // test
 			loadArr = dataArr.slice(0, n);
 	
 			renderCardList(loadArr);
@@ -126,7 +126,7 @@ function fetchTypes() {
 // Handler function for loading more cards. Initial shown cards are set to 8 
 function loadMore() {
 	let loadArr = dataArr.slice(8, n + 8);
-	
+
 	renderCardList(loadArr);
 	n += 8;
 	// console.log(loadArr); test
@@ -243,7 +243,7 @@ function selectByTypes(e) {
 
 function handleScrolling() {
 	let scrolled = root.scrollHeight - root.clientHeight;
-	if((root.scrollTop / scrolled) > 0.99 ) {
+	if((root.scrollTop / scrolled) > 0.95 ) {
 		btnToTop.style.display = 'block';
 	} else {
 		btnToTop.style.display = 'none';
