@@ -13,7 +13,7 @@ let selectColor = document.getElementById('colors');
 let selectTypes = document.getElementById('types');
 let btnSort = document.querySelector('.btnSort');
 let btnLoadMore = document.querySelector('.loadMore');
-let name; // User name from input field
+let userName; // User name from input field
 let dataArr = []; // all data from API
 let loadArr = [];
 let typesArr = [];
@@ -53,7 +53,7 @@ function drawCard(card) {
 	frontCard.appendChild(artist);
 
 	let types = document.createElement('p');
-	types.innerText = (card.types)? card.types.join(', ') : null;
+	types.innerText = (card.types) ? card.types.join(', ') : null;
 	frontCard.appendChild(types);
 
 	let set = document.createElement('p');
@@ -171,12 +171,12 @@ function handleRoute(e) {
 // Handler function on Sign in and Form submit (also validation and error message)
 function onSignIn(e) {
 	e.preventDefault();
-	name = inputField.value;
-	if (name === '' || name.length < 3 || name[0] != name[0].toUpperCase() || !name.match(/^[a-zA-Z\s]+$/)) {
+	userName = inputField.value;
+	if (userName === '' || userName.length < 3 || userName[0] != userName[0].toUpperCase() || !userName.match(/^[a-zA-Z\s]+$/)) {
 		small.style.display = 'block';
 	} else {
 		small.style.display = 'none';
-		localStorage.setItem('userName', name);
+		localStorage.setItem('userName', userName);
 		location.hash = '#cardslist';
 	};
 	inputField.value = '';
@@ -194,15 +194,16 @@ function searchNameText(e) {
 	btnLoadMore.style.display = 'none';
 	let keyword = e.target.value;
 	let arrByName = dataArr.filter(
-		(card) =>
-			card.name.toLowerCase().indexOf(keyword.toLowerCase()) > -1 ||
-			card.artist.toLowerCase().indexOf(keyword.toLowerCase()) > -1 ||
-			card.setName.toLowerCase().indexOf(keyword.toLowerCase()) > -1 ||
-			card.types.join(', ').toLowerCase().includes(keyword.toLowerCase()) ||
-			card.colors.join(', ').toLowerCase().includes(keyword.toLowerCase())
+		(card) => { 
+			return( 
+				card.name.toLowerCase().indexOf(keyword.toLowerCase()) > -1 ||
+				card.artist.toLowerCase().indexOf(keyword.toLowerCase()) > -1 ||
+				card.setName.toLowerCase().indexOf(keyword.toLowerCase()) > -1 
+				)
+		}	
 	);
-	
 	renderCardList(arrByName);
+	console.log(arrByName);
 };
 
 // Handler function for sorting cards by ascending or descending order
@@ -224,8 +225,11 @@ function selectByColor(e) {
 	btnLoadMore.style.display = 'none';
 	cardsList.innerHTML = ''; // clear the container for the new filtered cards
 	let keyColor = e.target.value;
-	let arrByColor = dataArr.filter((card) => card.colors.join(', ').toLowerCase().includes(keyColor.toLowerCase()));
-
+	let arrByColor = dataArr.filter(function(card) {
+		if (card.colors) {
+			return	card.colors.join(', ').toLowerCase().includes(keyColor.toLowerCase());	
+		} 
+	});
 	renderCardList(arrByColor);
 };
 
